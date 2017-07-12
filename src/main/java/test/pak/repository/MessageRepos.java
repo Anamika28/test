@@ -9,6 +9,6 @@ import test.pak.dao.Messages;
  */
 public interface MessageRepos extends JpaRepository<Messages, String> {
 
-//    @Query(value = "insert into Messages(sender_email, receiver_email, message)")
-//    void sendMessage(String sender_email, String receiver_email, String message);
+  @Query(value = "insert into Messages(email_id, sender_email, receiver_email, message) VALUES(:email_id, SELECT from User where email_id = :email_id AND status = true), (:sender_email, SELECT :email_id from User where status = true), (:receiver_email, SELECT :email_id from User where status = true),(:message, SELECT :email_id from User where status = true)")
+  void sendMessage(String email_id, String sender_email, String receiver_email, String message);
 }

@@ -39,17 +39,16 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     @Query(value = "update User user_age = age where email_id = emailId")
     public void EditUserAge(Integer age, String emailId);*/
 
-    @Query(value = "update User u SET u.userName = userName, u.userAddress = userAddress, u.userCntct = userCntct, u.password = password, u.userAge = userAge, u.status = status where u.email_id = emailId")
+    @Query(value = "update User u SET u.userName = userName, u.userAddress = userAddress, u.userCntct = userCntct, u.password = password, u.userAge = userAge, u.status = status where u.email_id = emailId AND u.status = true")
     void EditUser(String userName, String userAddress, Integer userAge, String password, Integer userCntct, String emailId, Boolean status);
 
     //userTemp.getEmail_id(), userTemp.getPassword(), userTemp.getUserAddress(), userTemp.getUserAge(), userTemp.getUserCntct(), userTemp.getUserName()
 
-    @Query(value = "delete from User where email_id = emailId")
+
+    @Query(value = "delete User u where u.email_id = :emailId AND u.status = true")
     void deleteUser(String emailId);
 
     @Query(value = "update User u SET u.status = false where u.email_id = emailId")
     void deActivateUser(String emailId);
-
-
 
 }

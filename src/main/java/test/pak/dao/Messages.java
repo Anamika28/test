@@ -60,4 +60,14 @@ public class Messages {
     public void setMessage(String sender_email, String receiver_email, String message) {
         this.message = message;
     }
+    @Column(name = "email_id")
+    public String email_id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
