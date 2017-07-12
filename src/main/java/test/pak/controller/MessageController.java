@@ -32,8 +32,11 @@ public class MessageController implements Serializable {
     public void sendMessage(@PathVariable Messages sender_email)
     {
         ArrayList<Messages> receiverList = new ArrayList<>();
+
+        for(Messages messages: receiverList)
+            receiverList.add(messages);
+
         messageService.saveMessage(receiverList);
     }
-
 
 }

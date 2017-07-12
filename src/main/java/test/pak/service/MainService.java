@@ -2,6 +2,7 @@ package test.pak.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import test.pak.dao.User;
 import test.pak.repository.UserRepository;
@@ -12,7 +13,8 @@ import java.util.List;
 /**
  * Created by anamika on 10/7/17.
  */
-@Component
+
+@Service
 public class MainService {
 
     @Autowired
@@ -24,8 +26,8 @@ public class MainService {
         return userList;
     }
 
-    public void saveUsers(User userTemp) {
-        userRepository.saveUser(userTemp.getEmail_id(), userTemp.getPassword(), userTemp.getUserAddress(), userTemp.getUserAge(), userTemp.getUserCntct(), userTemp.getUserName());
+    public void saveUsers(test.pak.dao.User userTemp) {
+        userRepository.save(userTemp);
     }
 
     public void editUser(User user) {
@@ -33,5 +35,10 @@ public class MainService {
         userRepository.EditUser(user.getUserName(), user.getUserAddress(), user.getUserAge(), user.getPassword(),
                 user.getUserCntct(),user.getEmail_id());
     }
+    public void deleteUser(User user)
+    {
+        userRepository.deleteUser(user.getEmail_id());
+    }
+
 
 }

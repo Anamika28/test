@@ -5,13 +5,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import test.pak.dao.EditUser;
 import test.pak.dao.User;
-import test.pak.repository.UserRepository;
 import test.pak.service.MainService;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -34,8 +31,8 @@ public class getDetails implements Serializable {
     }
 
     @RequestMapping(value = "/set_users", method = RequestMethod.POST)
-    public void saveUsers(@RequestBody User user) {
-        mainService.saveUsers(user);
+    public void saveUsers(@RequestBody User userTemp) {
+        mainService.saveUsers(userTemp);
     }
 
     @RequestMapping(value = "/edit_users", method = RequestMethod.POST)
@@ -43,6 +40,13 @@ public class getDetails implements Serializable {
     {
         mainService.editUser(user);
     }
+
+    @RequestMapping(value = "/delete_users", method = RequestMethod.POST)
+    public void deleteUser(@RequestBody User user)
+    {
+        mainService.deleteUser(user);
+    }
+
     //public List<User> findByuserid(int user_id) {
         //return null;
     //}

@@ -1,5 +1,7 @@
 package test.pak.dao;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -8,6 +10,7 @@ import javax.persistence.Table;
 /**
  * Created by anamika on 11/7/17.
  */
+@Component
 @Entity
 @Table(name = "messages")
 public class Messages {

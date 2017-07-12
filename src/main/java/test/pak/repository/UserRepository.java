@@ -39,10 +39,11 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     @Query(value = "update User user_age = age where email_id = emailId")
     public void EditUserAge(Integer age, String emailId);*/
 
-    @Query(value = "update User SET user_name = userName, user_addr = userAddress, user_cntct = userCntct, password = password, user_age = userAge, where email_id = emailId")
+    @Query(value = "update User u SET u.userName = userName, u.userAddress = userAddress, u.userCntct = userCntct, u.password = password, u.userAge = userAge where u.email_id = emailId")
     void EditUser(String userName, String userAddress, Integer userAge, String password, Integer userCntct, String emailId);
 
     //userTemp.getEmail_id(), userTemp.getPassword(), userTemp.getUserAddress(), userTemp.getUserAge(), userTemp.getUserCntct(), userTemp.getUserName()
-    @Query(value = "insert into User(email_id, password, user_address, user_age, user_cntct, user_name)values('email_id', 'password', 'user_address', 'user_age', 'user_cntct', 'user_name'))";
-    void saveUser(String emailId, String password, Integer userAddress, String userAge, Integer userCntct, String userName);
+
+    @Query(value = "delete from User where email_id = emailId")
+    void deleteUser(String emailId);
 }
