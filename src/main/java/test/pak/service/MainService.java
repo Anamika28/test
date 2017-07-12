@@ -33,12 +33,16 @@ public class MainService {
     public void editUser(User user) {
 //        String userName, String userAddress, String userAge, String password, String userCntct, String emailId
         userRepository.EditUser(user.getUserName(), user.getUserAddress(), user.getUserAge(), user.getPassword(),
-                user.getUserCntct(),user.getEmail_id());
+                user.getUserCntct(),user.getEmail_id(), user.getStatus());
     }
     public void deleteUser(User user)
     {
         userRepository.deleteUser(user.getEmail_id());
     }
 
+    public void deActivate(User user)
+    {
+        userRepository.deActivateUser(user.getEmail_id());
+    }
 
 }

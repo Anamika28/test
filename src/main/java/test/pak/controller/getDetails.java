@@ -1,10 +1,7 @@
 package test.pak.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import test.pak.dao.User;
 import test.pak.service.MainService;
 
@@ -23,6 +20,10 @@ public class getDetails implements Serializable {
     //private UserRepository userRepository;
     private MainService mainService;
 
+    /**
+     *
+     * @return
+     */
     @RequestMapping(value = "/get_users", method = RequestMethod.GET)
     public List<User> getUsers()
     {
@@ -45,6 +46,12 @@ public class getDetails implements Serializable {
     public void deleteUser(@RequestBody User user)
     {
         mainService.deleteUser(user);
+    }
+
+    @RequestMapping(value = "/deActivateUser", method = RequestMethod.POST)
+    public void deActivate(@RequestBody User user)
+    {
+        mainService.deActivate(user);
     }
 
     //public List<User> findByuserid(int user_id) {
