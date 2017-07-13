@@ -12,6 +12,6 @@ import java.util.LinkedList;
  */
 public interface MessageRepos extends JpaRepository<Messages, String> {
 
-  @Query(value = "insert into Messages(sender_email, receiver_email,message) values (('test', (select email_id from users where status = true)),('test', (select email_id from users where status = true)),('hi'))")
+  @Query(value = "insert into Messages(sender_email, receiver_email,message) values (('sender_email', (select email_id from users where status = true)),('receiver_email', (select email_id from users where status = true)),('hi'))")
   void sendMessage(String email_id, String sender_email, String receiver_email, String message);
 }
