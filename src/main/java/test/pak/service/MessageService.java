@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import test.pak.dao.Messages;
+import test.pak.dao.User;
 import test.pak.repository.MessageRepos;
 
 import java.util.ArrayList;
@@ -26,10 +27,16 @@ public class MessageService {
 
         //LinkedList<Messages> receiverList = new LinkedList<>();
 
+
         for(Messages messages: msg) {
-            messageRepos.save(messages);
+            ///messageRepos.sendMessage(messages.getSender_email(), messages.getReceiver_email(), messages.getMessage());
         }
 
     }
+    //public void activeUsersz();
+    //{
+      //  ArrayList<User> emailList = new ArrayList<User>();
+        //ArrayList<User> emailList = messageRepos.sendMessage(String sender_email, String);
+    //}
 
 }

@@ -2,10 +2,7 @@ package test.pak.dao;
 
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by anamika on 11/7/17.
@@ -16,6 +13,7 @@ import javax.persistence.Table;
 public class Messages {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
 //    @Column(name = "email_id")

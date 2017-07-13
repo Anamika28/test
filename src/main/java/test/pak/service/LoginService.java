@@ -19,7 +19,7 @@ public class LoginService {
     {
         User pass = userRepository.findByEmail(email_id);//method for getting password for a specified user_id
 
-        if(pass.getPassword().equals(password)==true)
+        if(pass.getPassword().equals(password))
         {
             //User userTmp = new User();
             //userTmp = userRepository.findByUserId(String email_id);

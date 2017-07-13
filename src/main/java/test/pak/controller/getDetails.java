@@ -42,7 +42,7 @@ public class getDetails implements Serializable {
         mainService.editUser(user);
     }
 
-    @RequestMapping(value = "/delete_users", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete_users", method = RequestMethod.DELETE)
     public void deleteUser(@RequestBody User user)
     {
         mainService.deleteUser(user);
