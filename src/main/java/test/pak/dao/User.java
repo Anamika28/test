@@ -37,13 +37,13 @@ public class User {
     }
 
     @Column(name = "user_cntct")
-    private Integer userCntct;
+    private String userCntct;
 
-    public Integer getUserCntct() {
+    public String getUserCntct() {
         return userCntct;
     }
 
-    public void setUserCntct(Integer userCntct) {
+    public void setUserCntct(String userCntct) {
         this.userCntct = userCntct;
     }
 

@@ -3,6 +3,7 @@ package test.pak.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 import test.pak.dao.User;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     @Query(value = "select u from User u")
     List<User> findAllUsers();
 
-    @Query(value = "select u from User u where email = ?1")
+    @Query(value = "select u from User u where u.email_id = ?1")
     User findByEmail(String email);
 
     //User findByUserId(Integer userId);
@@ -40,7 +41,7 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     public void EditUserAge(Integer age, String emailId);*/
 
     @Query(value = "update User u SET u.userName = userName, u.userAddress = userAddress, u.userCntct = userCntct, u.password = password, u.userAge = userAge, u.status = status where u.email_id = emailId AND u.status = true")
-    void EditUser(String userName, String userAddress, Integer userAge, String password, Integer userCntct, String emailId, Boolean status);
+    void EditUser(String userName, String userAddress, Integer userAge, String password, String userCntct, String emailId, Boolean status);
 
     //userTemp.getEmail_id(), userTemp.getPassword(), userTemp.getUserAddress(), userTemp.getUserAge(), userTemp.getUserCntct(), userTemp.getUserName()
 
@@ -51,4 +52,6 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     @Query(value = "update User u SET u.status = false where u.email_id = emailId")
     void deActivateUser(String emailId);
 
+    //@Query(value = "select userName from users where emailId = emailId")
+    //User Exists(String emailId);
 }

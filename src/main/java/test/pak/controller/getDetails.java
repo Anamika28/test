@@ -1,9 +1,18 @@
 package test.pak.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 import test.pak.dao.User;
 import test.pak.service.MainService;
+
+import javax.inject.Inject;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,8 +25,7 @@ import java.util.List;
 @RestController
 public class getDetails implements Serializable {
 
-    @Autowired
-    //private UserRepository userRepository;
+    @Inject
     private MainService mainService;
 
     /**
@@ -25,34 +33,90 @@ public class getDetails implements Serializable {
      * @return
      */
     @RequestMapping(value = "/get_users", method = RequestMethod.GET)
-    public List<User> getUsers()
+    public ResponseEntity getUsers()
     {
         List<User> userList =  mainService.findAllData();
-        return userList;
+        return new ResponseEntity(userList, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/set_users", method = RequestMethod.POST)
-    public void saveUsers(@RequestBody User userTemp) {
-        mainService.saveUsers(userTemp);
+    public ResponseEntity saveUsers(@RequestBody User userTemp) {
+
+        String contact = userTemp.getUserCntct(); //TODo missing null checks
+        int age = userTemp.getUserAge();
+
+        if (contact.length()!=10) {
+            //System.out.print("invalid contact");
+            return new ResponseEntity("invalid contact", HttpStatus.BAD_REQUEST);
+        }
+        else if (age<0 || age>100) {
+            return new ResponseEntity("invalid age", HttpStatus.BAD_REQUEST);
+        }
+        /*
+        else if(matchEmail(userTemp.getEmail_id()))
+        {
+            return new ResponseEntity("invalid email", HttpStatus.BAD_REQUEST);
+        }*/
+        else {
+             mainService.saveUsers(userTemp, HttpStatus.OK);
+             return new ResponseEntity("Successfully Saved", HttpStatus.OK);
+        }
+
     }
 
     @RequestMapping(value = "/edit_users", method = RequestMethod.POST)
-    public void editUser(@RequestBody User user)
+    public ResponseEntity editUser(@RequestBody User user)
     {
-        mainService.editUser(user);
-    }
+        int age = user.getUserAge();
+        String contact = user.getUserCntct();
 
+        if(age>=0 && age<=100 && contact.length()==10)
+        {
+            mainService.editUser(user);
+            return new ResponseEntity("success", HttpStatus.OK);
+        }
+        else if(age<0 || age>100) {
+            //System.out.print("invalid age");
+            return new ResponseEntity("invalid age", HttpStatus.BAD_REQUEST);
+        }
+        else if(contact.length()!=10) {
+            //System.out.print("invalid age");
+            return new ResponseEntity("invaid age", HttpStatus.BAD_REQUEST);
+        }
+
+        mainService.editUser(user);
+        return new ResponseEntity("Succesfully saved!", HttpStatus.OK);
+    }
+    public ResponseEntity showMessage()
+    {
+        return new ResponseEntity("Record not found", HttpStatus.BAD_REQUEST);
+    }
+    public ResponseEntity showMessage2() { //TODO improper method names
+        return new ResponseEntity("user already exists", HttpStatus.BAD_REQUEST);
+    }
     @RequestMapping(value = "/delete_users", method = RequestMethod.DELETE)
     public void deleteUser(@RequestBody User user)
     {
-        mainService.deleteUser(user);
+        String email = user.getEmail_id();
+        if(matchEmail(email))
+        mainService.deleteUser(email);
     }
 
     @RequestMapping(value = "/deActivateUser", method = RequestMethod.POST)
     public void deActivate(@RequestBody User user)
     {
-        mainService.deActivate(user);
+        String email = user.getEmail_id();
+        if (matchEmail(email))
+        mainService.deActivate(email);
     }
+    public boolean matchEmail(String Email)
+    {
+        String regex = "^(.+)@(.+)$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher((CharSequence)Email);
+        return matcher.matches();
+    }
+
 
     //public List<User> findByuserid(int user_id) {
         //return null;

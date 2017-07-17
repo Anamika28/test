@@ -1,4 +1,4 @@
-package test.pak.service;
+/*package test.pak.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -8,8 +8,9 @@ import test.pak.dao.User;
 import test.pak.repository.MessageRepos;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.LinkedList;*/
 
+/*
 @Service
 public class MessageService {
 
@@ -39,4 +40,4 @@ public class MessageService {
         //ArrayList<User> emailList = messageRepos.sendMessage(String sender_email, String);
     //}
 
-}
+}*/

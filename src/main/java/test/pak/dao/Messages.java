@@ -1,12 +1,13 @@
-package test.pak.dao;
+/*package test.pak.dao;
 
 import org.springframework.stereotype.Component;
 
-import javax.persistence.*;
+import javax.persistence.*;*/
 
 /**
  * Created by anamika on 11/7/17.
  */
+/*
 @Component
 @Entity
 @Table(name = "messages")
@@ -16,16 +17,6 @@ public class Messages {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-//    @Column(name = "email_id")
-//    private String email_id;
-//
-//    public String getEmail_id() {
-//        return email_id;
-//    }
-//
-//    public void setEmail_id(String email_id) {
-//        this.email_id = email_id;
-//    }
 
     @Column(name = "sender_email")
     private String sender_email;
@@ -68,4 +59,4 @@ public class Messages {
     public void setId(Long id) {
         this.id = id;
     }
-}
+}*/

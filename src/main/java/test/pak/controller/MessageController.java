@@ -1,4 +1,4 @@
-package test.pak.controller;
+/*package test.pak.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -14,11 +14,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import static test.pak.service.MessageService.*;
+import static test.pak.service.MessageService.*;*/
 
 /**
  * Created by anamika on 11/7/17.
  */
+/*
 @RestController
 public class MessageController implements Serializable {
 
@@ -39,4 +40,4 @@ public class MessageController implements Serializable {
         messageService.saveMessage(receiverList);
     }
 
-}
+}*/
