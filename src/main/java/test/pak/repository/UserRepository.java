@@ -1,7 +1,9 @@
 package test.pak.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor;
 import test.pak.dao.User;
@@ -39,18 +41,21 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
     @Query(value = "update User user_age = age where email_id = emailId")
     public void EditUserAge(Integer age, String emailId);*/
-
-    @Query(value = "update User u SET u.userName = userName, u.userAddress = userAddress, u.userCntct = userCntct, u.password = password, u.userAge = userAge, u.status = status where u.email_id = emailId AND u.status = true")
-    void EditUser(String userName, String userAddress, Integer userAge, String password, String userCntct, String emailId, Boolean status);
+    @Modifying
+    @Query(value = "update User u SET u.userName = :userName, u.userAddress = :userAddress, u.userCntct = :userCntct, u.password = :password, u.userAge = :userAge, u.status = :status where u.email_id = :emailId AND u.status = true")
+    void editUser(@Param("userName") String userName, @Param("userAddress") String userAddress, @Param("userAge") Integer userAge,
+                  @Param("password") String password, @Param("userCntct") String userCntct, @Param("emailId") String emailId,
+                  @Param("status") Boolean status);
 
     //userTemp.getEmail_id(), userTemp.getPassword(), userTemp.getUserAddress(), userTemp.getUserAge(), userTemp.getUserCntct(), userTemp.getUserName()
 
 
-    @Query(value = "delete User u where u.email_id = :emailId AND u.status = true")
+    @Query(value = "delete User u where u.email_id = ?1 AND u.status = true")
     void deleteUser(String emailId);
 
-    @Query(value = "update User u SET u.status = false where u.email_id = emailId")
-    void deActivateUser(String emailId);
+    @Modifying
+    @Query(value = "update User u SET u.status = false where u.email_id = :email")
+    void deActivateUser(@Param("email") String emailId);
 
     //@Query(value = "select userName from users where emailId = emailId")
     //User Exists(String emailId);

@@ -12,6 +12,7 @@ import test.pak.dao.User;
 import test.pak.repository.UserRepository;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.validation.constraints.Null;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -45,15 +46,13 @@ public class MainService {
         }
     }
 
+    @Transactional
     public void editUser(User user) {
 
         User u = userRepository.findByEmail(user.getEmail_id());
         if(u!= null) {
-            userRepository.EditUser(user.getUserName(), user.getUserAddress(), user.getUserAge(), user.getPassword(), user.getUserCntct(), user.getEmail_id(), user.getStatus());
-        }
-        else if(u==null)
-        {
-            //System.out.print("user does not exist");
+            userRepository.editUser(user.getUserName(), user.getUserAddress(), user.getUserAge(), user.getPassword(), user.getUserCntct(), user.getEmail_id(), user.getStatus());
+        } else {
             details.showMessage();
         }
 
@@ -71,7 +70,7 @@ public class MainService {
                 details.showMessage();
             }
     }
-
+    @Transactional
     public void deActivate(String email)
     {
         User u = userRepository.findByEmail(email);

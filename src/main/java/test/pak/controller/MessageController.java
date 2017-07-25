@@ -1,43 +1,41 @@
-/*package test.pak.controller;
+package test.pak.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import test.pak.dao.Messages;
 import test.pak.service.MainService;
 import test.pak.service.MessageService;
 
+import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-import static test.pak.service.MessageService.*;*/
+import static com.sun.org.apache.xml.internal.serializer.utils.Utils.messages;
+import static test.pak.service.MessageService.*;
 
 /**
  * Created by anamika on 11/7/17.
  */
-/*
+
 @RestController
+@RequestMapping("/api1")
 public class MessageController implements Serializable {
 
-    private String sender_email;
-    private String receiver_email;
+    //ArrayList<Messages> msg = new ArrayList<Messages>();
 
     @Autowired
-    private MessageService messageService;
+    public MessageService messageService;
 
     @RequestMapping(value ="/send_message", method = RequestMethod.POST)
-    public void sendMessage(@PathVariable Messages sender_email)
+    public ResponseEntity sendMessage(@RequestBody ArrayList<Messages> msg)
     {
-        ArrayList<Messages> receiverList = new ArrayList<>();
-
-        for(Messages messages: receiverList)
-            receiverList.add(messages);
-
-        messageService.saveMessage(receiverList);
+        ResponseEntity<String> obj;
+        obj = messageService.saveMessage(msg);
+        return obj;
     }
 
-}*/
+}

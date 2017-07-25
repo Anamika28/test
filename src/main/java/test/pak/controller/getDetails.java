@@ -1,21 +1,19 @@
 package test.pak.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.*;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import test.pak.dao.User;
 import test.pak.service.MainService;
 
 import javax.inject.Inject;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import java.io.Serializable;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by anamika on 8/7/17.
@@ -50,7 +48,7 @@ public class getDetails implements Serializable {
             return new ResponseEntity("invalid contact", HttpStatus.BAD_REQUEST);
         }
         else if (age<0 || age>100) {
-            return new ResponseEntity("invalid age", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new String("{\"msg\" : \"invalid age\"}"), HttpStatus.BAD_REQUEST);
         }
         /*
         else if(matchEmail(userTemp.getEmail_id()))
@@ -59,7 +57,7 @@ public class getDetails implements Serializable {
         }*/
         else {
              mainService.saveUsers(userTemp, HttpStatus.OK);
-             return new ResponseEntity("Successfully Saved", HttpStatus.OK);
+             return new ResponseEntity(new String("Successfully Saved"), HttpStatus.OK);
         }
 
     }
@@ -98,7 +96,7 @@ public class getDetails implements Serializable {
     public void deleteUser(@RequestBody User user)
     {
         String email = user.getEmail_id();
-        if(matchEmail(email))
+        //if(matchEmail(email))
         mainService.deleteUser(email);
     }
 
@@ -106,16 +104,16 @@ public class getDetails implements Serializable {
     public void deActivate(@RequestBody User user)
     {
         String email = user.getEmail_id();
-        if (matchEmail(email))
+        //if (matchEmail(email))
         mainService.deActivate(email);
     }
-    public boolean matchEmail(String Email)
+    /*public boolean matchEmail(String Email)
     {
         String regex = "^(.+)@(.+)$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher((CharSequence)Email);
         return matcher.matches();
-    }
+    }*/
 
 
     //public List<User> findByuserid(int user_id) {

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Messaging</title>
+</head>
+<body>
+<div ng-view></div>
+<script src="/js/angular.min.js"></script>
+
+<script src="/js/messageController.js"></script>
+
+<div ng-controller="msgCtrl">
+
+    <form>
+        <label><b>Sender</b></label>
+        <input type="text" placeholder="Enter sender" name="sender" required ng-model="sender"/>
+
+        <label><b>Receiver</b></label>
+        <input type="text" placeholder="Enter receiver" name="receiver" required ng-model="receiver"/>
+
+        <label><b>Message</b></label>
+        <input type="text" placeholder="Enter message" name="message" required ng-model="message"/>
+
+        <button ng-click="storeMessage()">Enter</button>
+        <button ng-click="sendMessage()">Send</button>
+    </form>
+
+</div>
+
+</body>
+</html>

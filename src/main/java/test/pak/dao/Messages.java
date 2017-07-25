@@ -1,13 +1,13 @@
-/*package test.pak.dao;
+package test.pak.dao;
 
 import org.springframework.stereotype.Component;
 
-import javax.persistence.*;*/
+import javax.persistence.*;
 
 /**
  * Created by anamika on 11/7/17.
  */
-/*
+
 @Component
 @Entity
 @Table(name = "messages")
@@ -18,26 +18,27 @@ public class Messages {
     Long id;
 
 
+    @JoinColumn(name = "")
     @Column(name = "sender_email")
-    private String sender_email;
+    private String senderEmail;
 
-    public String getSender_email() {
-        return sender_email;
+    public String getSenderEmail() {
+        return senderEmail;
     }
 
-    public void setSender_email(String sender_email) {
-        this.sender_email = sender_email;
+    public void setSenderEmail(String senderEmail) {
+        this.senderEmail = senderEmail;
     }
 
     @Column(name = "receiver_email")
-    private String receiver_email;
+    private String receiverEmail;
 
-    public String getReceiver_email() {
-        return receiver_email;
+    public String getReceiverEemail() {
+        return receiverEmail;
     }
 
-    public void setReceiver_email(String receiver_email) {
-        this.receiver_email = receiver_email;
+    public void setReceiverEmail(String receiver_email) {
+        this.receiverEmail = receiverEmail;
     }
     @Column(name = "message")
     public String message;
@@ -46,17 +47,8 @@ public class Messages {
         return message;
     }
 
-    public void setMessage(String sender_email, String receiver_email, String message) {
+    public void setMessage(String message) {
         this.message = message;
     }
-    @Column(name = "email_id")
-    public String email_id;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-}*/
+}

@@ -1,16 +1,17 @@
-/*package test.pak.service;
+package test.pak.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import test.pak.dao.Messages;
-import test.pak.dao.User;
 import test.pak.repository.MessageRepos;
+import test.pak.repository.UserRepository;
 
 import java.util.ArrayList;
-import java.util.LinkedList;*/
+import java.util.Iterator;
 
-/*
+
 @Service
 public class MessageService {
 
@@ -18,26 +19,31 @@ public class MessageService {
     private MessageRepos messageRepos;
 
     @Autowired
-    private LoginService loginService;
+    private UserRepository userRepository;
 
-    private test.pak.dao.User sender;
+    public ResponseEntity saveMessage(ArrayList<Messages> msg)
+    {
+        Iterator itr = msg.iterator();
 
+        while(itr.hasNext())
+        {
+            Messages m = (Messages)itr.next();
+            Boolean sStatus = messageRepos.findStatus(m.getSenderEmail());
+            Boolean rStatus = messageRepos.findStatus(m.getReceiverEemail());
 
-    //Messages pass = userRepository.findByEmail(sender_email);
-    public void saveMessage(ArrayList<Messages> msg) {
+            if(sStatus== null)
+                return new ResponseEntity<java.lang.String>("sender does not exist", HttpStatus.BAD_REQUEST);
 
-        //LinkedList<Messages> receiverList = new LinkedList<>();
+            else if(rStatus==null)
+                return new ResponseEntity("receiver does not exist", HttpStatus.BAD_REQUEST);
 
-
-        for(Messages messages: msg) {
-            ///messageRepos.sendMessage(messages.getSender_email(), messages.getReceiver_email(), messages.getMessage());
+            else if(sStatus==false || rStatus==false)
+            {
+                return new ResponseEntity("sender or receiver does not exist", HttpStatus.BAD_REQUEST);
+            }
+            messageRepos.save(m);
         }
-
+        return new ResponseEntity("successfully saved", HttpStatus.OK);
     }
-    //public void activeUsersz();
-    //{
-      //  ArrayList<User> emailList = new ArrayList<User>();
-        //ArrayList<User> emailList = messageRepos.sendMessage(String sender_email, String);
-    //}
 
-}*/
+}
