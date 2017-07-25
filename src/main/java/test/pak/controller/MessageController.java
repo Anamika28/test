@@ -1,21 +1,16 @@
 package test.pak.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import test.pak.dao.Messages;
-import test.pak.service.MainService;
 import test.pak.service.MessageService;
 
-import javax.inject.Inject;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedList;
-
-import static com.sun.org.apache.xml.internal.serializer.utils.Utils.messages;
-import static test.pak.service.MessageService.*;
 
 /**
  * Created by anamika on 11/7/17.
